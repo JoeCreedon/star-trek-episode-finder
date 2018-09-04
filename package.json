@@ -1,0 +1,14 @@
+{
+  "name": "trek_finder",
+  "version": "1.0.0",
+  "description": "star trek episode finder",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o dist/css/ --recursive"
+  },
+  "author": "Joe Creedon and Chris Plumer",
+  "license": "MIT",
+  "dependencies": {
+    "node-sass": "^4.9.3"
+  }
+}
