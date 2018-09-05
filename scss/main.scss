@@ -64,7 +64,7 @@ main{
       i{
         font-size: 1.5rem;
       }
-      
+
       input{
         font-size: 1.5rem;
         border-radius: 10px;
@@ -77,8 +77,8 @@ main{
 .episode-info{
   margin-top: 20px;
   display: grid;
-  grid-gap: 30px; 
-  grid-template-areas: 
+  grid-gap: 30px;
+  grid-template-areas:
   'episodeimage summary summary'
   'characters cultures themes';
   grid-template-columns: repeat(3, 1fr);
@@ -91,7 +91,7 @@ main{
     height: auto;
     width: 100%;
   }
-  
+
   .episode-summary{
     grid-area: summary;
     font-size: 1.5rem;
@@ -100,19 +100,19 @@ main{
   .list h3{
     text-align: center;
   }
-  
+
   .characters{
     grid-area: characters;
   }
-  
+
   .cultures{
     grid-area: cultures;
   }
-  
+
   .themes{
     grid-area: themes;
   }
-  
+
   .list{
     background: lighten($primary-color, 5);
     padding: 0.5rem;
@@ -168,7 +168,7 @@ main{
   text-align: center;
   padding: 1rem;
   background: darken($color: $primary-color, $amount: 10);
-  color: set-text-color($primary-color);  
+  color: set-text-color($primary-color);
   height: 60px;
 }
 
