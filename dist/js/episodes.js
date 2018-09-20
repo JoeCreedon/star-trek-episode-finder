@@ -11,7 +11,6 @@
   class EpisodeListComponent {
     constructor() {
       console.log('built an EpisodeListComponent')
-
       this.episodes = [fakeEpisode, fakeEpisode2]
     }
 
@@ -25,7 +24,13 @@
       }).then(response => {
         return response.json()
       }).then(json => {
-        fetchedEpisodes = json.series.episodes
+        fetchedEpisodes = json.series.episodes.sort((a, b) =>{
+          if(a.stardateFrom > b.stardateFrom){
+            return 1;
+          } else {
+            return -1;
+          }
+        })
         this.episodes = fetchedEpisodes
         this.renderEpisodeList()
       })
@@ -37,10 +42,10 @@
       const items = this.episodes.map(episode => {
         const markup = `
           <div class="item">
-            <a href="#!">
+            <a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}">
               <img src="img/TOS_Cast.jpg" alt="Screenshot from ${episode.title}">
             </a>
-            <a href="#" class="btn-dark">
+            <a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}" class="btn-dark">
               <h3>${episode.title}</h3>
             </a>
             <a href="#" class="btn-light">
