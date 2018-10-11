@@ -46,10 +46,17 @@
         `;
       })
       relationsList.innerHTML = relationsMarkUp.join('');
+
+      const epiList = document.querySelector('.js-character-episodes');
+
+      const epiMarkUp = this.characterInfo.episodes.map(episode => {return `<a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}">
+      <li>${episode.title}</li>
+     </a>`})
+      epiList.innerHTML = epiMarkUp.join('');
      
       //Add STMotionPicture to movies array because it's not in STAPI
      const motionPictureObject = {
-        uid: "MOMA000042069",
+        uid: "MOMA0000006645",
         title: "Star Trek the Motion Picture",
         usReleaseDate: "1979-12-07",
         characters: [
@@ -83,7 +90,10 @@
           }
         ]
       }
-      
+      console.log(this.characterInfo.movies)
+     if(this.characterInfo.movies === []){ 
+       console.log('hello');
+     }
       if(this.characterInfo.movies[0].uid === 'MOMA0000173722'){
         this.characterInfo.movies.push(motionPictureObject)
       } 
@@ -93,13 +103,6 @@
         return `<a href="/star-trek-episode-finder/dist/movie.html?uid=${movie.uid}"><li>${movie.title}</li></a>`;
       })
       movieList.innerHTML = movieMarkUp.join('');
-
-      const epiList = document.querySelector('.js-character-episodes');
-
-      const epiMarkUp = this.characterInfo.episodes.map(episode => {return `<a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}">
-      <li>${episode.title}</li>
-     </a>`})
-      epiList.innerHTML = epiMarkUp.join('');
     }
   }
   const characterInfo = new CharacterInfoComponent;

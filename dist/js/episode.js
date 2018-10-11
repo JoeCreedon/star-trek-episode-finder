@@ -36,7 +36,7 @@
              </a>`;
       })
       characterList.innerHTML = charMarkUp.join('')
-
+      console.log(this.epiInfoObject.writers);
       const writerList = document.querySelector('.js-episode-writers');
       const writerMarkUp = this.epiInfoObject.writers.map(writer => {
         return `<a href="/star-trek-episode-finder/dist/writer.html?uid=${writer.uid}"><li>${writer.name}</li></a>`;
