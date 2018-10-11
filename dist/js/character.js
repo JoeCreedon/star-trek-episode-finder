@@ -31,7 +31,6 @@
       species.innerHTML = speciesMarkUp.join(' / ');
 
       const affliations = document.querySelector('.js-affilations');
-
       const affilMarkUp = this.characterInfo.organizations.map(organization => {
         return organization.name;
       });
@@ -47,9 +46,49 @@
         `;
       })
       relationsList.innerHTML = relationsMarkUp.join('');
-
-      const movieList = document.querySelector('.js-character-movies');
+     
+      //Add STMotionPicture to movies array because it's not in STAPI
+     const motionPictureObject = {
+        uid: "MOMA000042069",
+        title: "Star Trek the Motion Picture",
+        usReleaseDate: "1979-12-07",
+        characters: [
+          {
+            uid: "CHMA0000022794",
+            name: "Leonard McCoy"
+          },
+          {
+            uid: "CHMA0000111295",
+            name: "Hikaru Sulu"
+          },
+          {
+            uid: "CHMA0000108904",
+            name: "Montgomery Scott"
+          },
+          {
+            uid: "CHMA0000003172",
+            name: "Pavel Chekov"
+          },
+          {
+            uid: "CHMA0000147243",
+            name: "James T. Kirk"
+          },
+          {
+            uid: "CHMA0000202697",
+            name: 'Spock'
+          },
+          {
+            uid: "CHMA0000068639",
+            name: "Nyota Uhura"
+          }
+        ]
+      }
       
+      if(this.characterInfo.movies[0].uid === 'MOMA0000173722'){
+        this.characterInfo.movies.push(motionPictureObject)
+      } 
+      //Movie list mark up
+      const movieList = document.querySelector('.js-character-movies');
       const movieMarkUp = this.characterInfo.movies.sort((a, b) => (a.usReleaseDate > b.usReleaseDate) ? 1 : -1).map(movie => {
         return `<a href="/star-trek-episode-finder/dist/movie.html?uid=${movie.uid}"><li>${movie.title}</li></a>`;
       })
