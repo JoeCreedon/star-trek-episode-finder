@@ -1,52 +1,43 @@
-(function(window){
+(function(){
   class CharacterListComponent{
     constructor(){
+      this.uid = `uid=EPMA0000000454`;
+      this.url =`http://stapi.co/api/v1/rest/episode?${this.uid}`;
     }
     
-    fetchCharacterList(){
-      const url = `http://stapi.co/api/v1/rest/episode?uid=EPMA0000000454`;
-      let fetchedCharacterList = []
+    async getCharacterList(){
+      this.response = await fetch(this.url, {method: 'GET'});
+      this.data = await this.response.json();
+      this.renderCharacterList();
+  }
 
-      fetch(url, {method: 'GET'}).then(response => {
-        return response.json();
-      }).then(json => {
-        
-         const fetchedCharacterList = json.episode.characters;
+  renderCharacterList(){
+    const charMarkUp = this.data.episode.characters.map(character => {
+      return  `
+      <div class="item">
+        <a href="/star-trek-episode-finder/dist/character.html?uid=${character.uid}">
+          <img src="img/q.jpeg" alt="Q">
+        </a>
+        <a href="/star-trek-episode-finder/dist/character.html?uid=${character.uid}" class="btn-dark">
+          <h3>${character.name}</h3>
+        </a>
+        <a href="#" class="btn-light">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </a>
+        </div>
+        `
+    });
 
-         this.characterList = fetchedCharacterList;
-
-         this.renderCharacterEpisodeList();
-      })
-    }
-
-    renderCharacterEpisodeList(){
-      
-      const container = document.querySelector('.js-character-episodes-container');
-
-      const items = this.characterList.map(character => {
-        const markup = `<div class="episodes">
-        <div class="item">
-          <a href="/star-trek-episode-finder/dist/character.html?uid=${character.uid}">
-            <img src="img/q.jpeg" alt="Q">
-          </a>
-          <a href="/star-trek-episode-finder/dist/character.html?uid=${character.uid}" class="btn-dark">
-            <h3>${character.name}</h3>
-          </a>
-          <a href="#" class="btn-light">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </a>`
-
-          return markup;
-      })
-
-      container.innerHTML = items.join('\n')
-    }
+    const container = document.querySelector('.js-character-list-container');
+    container.innerHTML = charMarkUp.join('');
+  }
+  
   }
 
   const characterList = new CharacterListComponent;
-  characterList.fetchCharacterList();
+  characterList.getCharacterList();
   
 }(window));

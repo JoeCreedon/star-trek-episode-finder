@@ -9,6 +9,11 @@
   .episodes{
     grid-template-columns: repeat(4, 1fr);
   }
+  #featured-characters{
+    .characters{
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }
 
 //Desktop & Laptop
@@ -45,6 +50,7 @@
     margin-bottom: 2rem;
     margin-top: 10vh;
   }
+}
 
   .episode-info{
     grid-template-areas: 
@@ -60,6 +66,10 @@
   .episodes{
     grid-template-columns: repeat(2, 1fr);
   }
+  #featured-characters{
+  .characters{
+    grid-template-columns: repeat(2, 1fr);
+   }
   }
 }
 
@@ -98,5 +108,14 @@
   .episodes{
     grid-template-columns: 1fr;
   }
+ }
+
+ #featured-characters{
+   h1{
+     font-size: 4rem;
+   }
+   .characters{
+     grid-template-columns: 1fr;
+   }
  }
 }

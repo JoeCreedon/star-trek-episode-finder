@@ -4,6 +4,7 @@
 
 *{
   box-sizing: border-box;
+  list-style: none;
 }
 
 body{
@@ -74,6 +75,10 @@ main{
 }
 
 //Episode page
+.subHeading{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .episode-info{
   margin-top: 20px;
   display: grid;
@@ -101,16 +106,31 @@ main{
     text-align: center;
   }
 
-  .characters{
+  .container1{
     grid-area: characters;
+    a{
+      &:hover{
+      color: $kirk-yellow;
+      }
+    }
   }
 
-  .cultures{
+  .container2{
     grid-area: cultures;
+    a{
+      &:hover{
+      color: $kirk-yellow;
+      }
+    }
   }
 
-  .themes{
+  .container3{
     grid-area: themes;
+    a{
+      &:hover{
+      color: $kirk-yellow;
+      }
+    }
   }
 
   .list{
@@ -136,6 +156,26 @@ main{
       @include easeOut;
     }
   }
+}
+
+#featured-characters{
+  .characters{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.7rem;
+    img{
+      width: 100%;
+      border: 3px #fff solid;
+
+      &:hover{
+        opacity: 0.5;
+        border-color: $kirk-yellow;
+        @include easeOut;
+      }
+    }
+    
+ }
 }
 
 //Button Styles

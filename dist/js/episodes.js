@@ -1,50 +1,32 @@
-(function(window) {
-
-  const fakeEpisode = {
-    title: 'The Inner Light'
-  }
-
-  const fakeEpisode2 = {
-    title: 'Profit and Lace'
-  }
+(function() {
 
   class EpisodeListComponent {
-    constructor() {
-      console.log('built an EpisodeListComponent')
-      this.episodes = [fakeEpisode, fakeEpisode2]
+    constructor(){
+      this.uid = `uid=SEMA0000097474`;
+      this.url = `http://stapi.co/api/v1/rest/series?${this.uid}`;
     }
+    
+    async fetchEpisodes() {
+      //get episodes from api
 
-    fetchEpisodes() {
-      // go get the episodes from the api
-      const url = 'http://stapi.co/api/v1/rest/series?uid=SEMA0000097474'
-      let fetchedEpisodes = []
-
-      fetch(url, {
+      const response = await fetch(this.url, {
         method: 'GET'
-      }).then(response => {
-        return response.json()
-      }).then(json => {
-        fetchedEpisodes = json.series.episodes.sort((a, b) =>{
-          if(a.stardateFrom > b.stardateFrom){
-            return 1;
-          } else {
-            return -1;
-          }
-        })
-        this.episodes = fetchedEpisodes
-        this.renderEpisodeList()
-      })
-    }
+      });
+      this.epiArray = await response.json().then(data => data.series.episodes)
+      
+      //Sort by star date
+      this.epiArray.sort((a, b) => (a.stardateFrom > b.stardateFrom) ? 1 : -1);
 
-    renderEpisodeList() {
-      console.log('render episodes', this.episodes)
+      this.renderEpisodesList()
+   }
 
-      const items = this.episodes.map(episode => {
-        const markup = `
-          <div class="item">
+    renderEpisodesList() {
+      const items = this.epiArray.map(episode => {
+        return `
+        <div class="item">
             <a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}">
-              <img src="img/TOS_Cast.jpg" alt="Screenshot from ${episode.title}">
-            </a>
+                  <img src="img/TOS_Cast.jpg" alt="Screenshot from ${episode.title}">
+              </a>
             <a href="/star-trek-episode-finder/dist/episode.html?uid=${episode.uid}" class="btn-dark">
               <h3>${episode.title}</h3>
             </a>
@@ -54,19 +36,16 @@
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
             </a>
-          </div>
-        `
-
-        return markup
+          </div>`
       })
 
       const container = document.querySelector('.js-episodes-container')
 
       container.innerHTML = items.join('\n')
-    }
+     }
   }
 
-  episodeList = new EpisodeListComponent()
+  episodeList = new EpisodeListComponent; 
   episodeList.fetchEpisodes()
 
-}(window));
+}(window))
