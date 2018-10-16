@@ -90,10 +90,7 @@
           }
         ]
       }
-      console.log(this.characterInfo.movies)
-     if(this.characterInfo.movies === []){ 
-       console.log('hello');
-     }
+  
       if(this.characterInfo.movies[0].uid === 'MOMA0000173722'){
         this.characterInfo.movies.push(motionPictureObject)
       } 
