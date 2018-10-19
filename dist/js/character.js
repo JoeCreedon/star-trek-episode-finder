@@ -14,6 +14,10 @@
         fetchedCharacter = json.character;
       })
       this.characterInfo = fetchedCharacter;
+      ///Get info for Motion Picture because it's not in the API
+      this.res = await fetch('motion_picture.json', {method: 'GET'});
+      this.motionPictureData = await this.res.json();
+  
       this.renderCharacterInfo();
     }
 
@@ -53,46 +57,9 @@
       <li>${episode.title}</li>
      </a>`})
       epiList.innerHTML = epiMarkUp.join('');
-     
-      //Add STMotionPicture to movies array because it's not in STAPI
-     const motionPictureObject = {
-        uid: "MOMA0000006645",
-        title: "Star Trek the Motion Picture",
-        usReleaseDate: "1979-12-07",
-        characters: [
-          {
-            uid: "CHMA0000022794",
-            name: "Leonard McCoy"
-          },
-          {
-            uid: "CHMA0000111295",
-            name: "Hikaru Sulu"
-          },
-          {
-            uid: "CHMA0000108904",
-            name: "Montgomery Scott"
-          },
-          {
-            uid: "CHMA0000003172",
-            name: "Pavel Chekov"
-          },
-          {
-            uid: "CHMA0000147243",
-            name: "James T. Kirk"
-          },
-          {
-            uid: "CHMA0000202697",
-            name: 'Spock'
-          },
-          {
-            uid: "CHMA0000068639",
-            name: "Nyota Uhura"
-          }
-        ]
-      }
-  
+    
       if(this.characterInfo.movies[0].uid === 'MOMA0000173722'){
-        this.characterInfo.movies.push(motionPictureObject)
+        this.characterInfo.movies.push(this.motionPictureData[0])
       } 
       //Movie list mark up
       const movieList = document.querySelector('.js-character-movies');
